@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>欢迎 - Daniel's Homepage</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-slate-800 to-gray-700 min-h-screen flex items-center justify-center text-white">
+
+  <div class="bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-10 max-w-md w-full text-center">
+
+    <!-- 语言切换按钮 -->
+    <div class="flex justify-end mb-4 space-x-2">
+      <button onclick="setLanguage('zh')" class="hover:scale-105 transition">
+        <img src="https://flagcdn.com/w40/cn.png" alt="中文" class="w-7 h-5 rounded" title="中文" />
+      </button>
+      <button onclick="setLanguage('en')" class="hover:scale-105 transition">
+        <img src="https://flagcdn.com/w40/us.png" alt="English" class="w-7 h-5 rounded" title="English" />
+      </button>
+      <button onclick="setLanguage('kr')" class="hover:scale-105 transition">
+        <img src="https://flagcdn.com/w40/kr.png" alt="한국어" class="w-7 h-5 rounded" title="한국어" />
+      </button>
+    </div>
+
+    <!-- 头像 -->
+    <img src="/resources/images/panda_smile_loop.gif" alt="头像" class="w-32 h-32 mx-auto rounded-full border-4 border-white mb-4 shadow-lg" />
+    
+    <!-- 欢迎语 -->
+    <h1 class="text-3xl font-bold mb-2">
+      <span id="greeting">你好，我是</span>
+      <span class="text-teal-300">Daniel</span>
+    </h1>
+    <p id="subtext" class="text-white/80 mb-6">欢迎来到我的主页</p>
+    
+    <!-- 按钮 -->
+    <div class="flex justify-center gap-4 mb-6">
+      <a href="https://hulehe.github.io/" rel="noopener noreferrer"
+         id="aboutBtn"
+         class="bg-teal-400 hover:bg-teal-500 text-black px-5 py-2 rounded-full font-semibold transition">关于我</a>
+      <a href="https://lavish-fiber-99c.notion.site/1ebbd80bcc3480ad9ee2dac79aaaeaeb?pvs=4" rel="noopener noreferrer"
+         id="blogBtn"
+         class="border border-white hover:bg-white hover:text-gray-800 px-5 py-2 rounded-full font-semibold transition">我的博客</a>
+    </div>
+
+    <!-- 社交图标 -->
+    <div class="flex justify-center space-x-6 text-2xl text-white/80">
+      <a href="https://github.com/hulehe" rel="noopener noreferrer" class="hover:text-white transition">
+        <i class="fab fa-github"></i>
+      </a>
+      <button onclick="copyToClipboard('weixinID', 'wechat')" class="hover:text-green-400 transition" title="复制微信号">
+        <i class="fab fa-weixin"></i>
+      </button>
+      <button onclick="copyToClipboard('phoneNumber', 'phone')" class="hover:text-blue-400 transition" title="复制手机号">
+        <i class="fas fa-phone"></i>
+      </button>
+    </div>
+
+    <!-- 隐藏数据 -->
+    <span id="weixinID" class="hidden">huzhenkai</span>
+    <span id="phoneNumber" class="hidden">010-6381-8803</span>
+
+    <!-- 复制提示 -->
+    <div id="copyMsg" class="fixed top-6 left-1/2 transform -translate-x-1/2 bg-black/70 text-white text-sm px-4 py-2 rounded-xl shadow-lg hidden transition-opacity duration-300 z-50"></div>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const translations = {
+      zh: {
+        greeting: "你好，我是",
+        subtext: "欢迎来到我的主页",
+        about: "关于我",
+        blog: "我的博客",
+        copiedWeChat: "已复制微信号！",
+        copiedPhone: "已复制手机号！"
+      },
+      en: {
+        greeting: "Hello, I'm",
+        subtext: "Welcome to my personal homepage",
+        about: "About Me",
+        blog: "My Blog",
+        copiedWeChat: "WeChat ID copied!",
+        copiedPhone: "Phone number copied!"
+      },
+      kr: {
+        greeting: "안녕하세요, 저는",
+        subtext: "제 개인 홈페이지에 오신 것을 환영합니다",
+        about: "소개",
+        blog: "블로그",
+        copiedWeChat: "위챗 아이디가 복사되었습니다!",
+        copiedPhone: "전화번호가 복사되었습니다!"
+      }
+    };
+
+
+    let currentLang = 'zh';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const t = translations[lang];
+      document.getElementById("greeting").textContent = t.greeting;
+      document.getElementById("subtext").textContent = t.subtext;
+      document.getElementById("aboutBtn").textContent = t.about;
+      document.getElementById("blogBtn").textContent = t.blog;
+    }
+
+
+    function copyToClipboard(elementId, type) {
+      const text = document.getElementById(elementId).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const msgBox = document.getElementById('copyMsg');
+        const message = type === 'wechat' 
+          ? translations[currentLang].copiedWeChat 
+          : translations[currentLang].copiedPhone;
+
+        msgBox.textContent = message;
+        msgBox.classList.remove('hidden');
+        msgBox.style.opacity = 1;
+        setTimeout(() => {
+          msgBox.style.opacity = 0;
+          setTimeout(() => msgBox.classList.add('hidden'), 300);
+        }, 1500);
+      }).catch(() => {
+        alert('复制失败，请手动复制');
+      });
+    }
+
+  </script>
+
+</body>
+</html>
