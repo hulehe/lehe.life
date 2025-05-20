@@ -35,14 +35,18 @@
     <p id="subtext" class="text-white/80 mb-6">欢迎来到我的主页</p>
     
     <!-- 按钮 -->
-    <div class="flex justify-center gap-4 mb-6">
+    <div class="flex justify-center gap-3 flex-wrap mb-6">
       <a href="https://hulehe.github.io/" rel="noopener noreferrer"
-         id="aboutBtn"
-         class="bg-teal-400 hover:bg-teal-500 text-black px-5 py-2 rounded-full font-semibold transition">关于我</a>
+        id="aboutBtn"
+        class="bg-teal-400 hover:bg-teal-500 text-black px-3 py-2 rounded-full font-semibold transition whitespace-nowrap">关于我</a>
       <a href="https://lavish-fiber-99c.notion.site/1ebbd80bcc3480ad9ee2dac79aaaeaeb?pvs=4" rel="noopener noreferrer"
-         id="blogBtn"
-         class="border border-white hover:bg-white hover:text-gray-800 px-5 py-2 rounded-full font-semibold transition">我的博客</a>
+        id="blogBtn"
+        class="border border-white hover:bg-white hover:text-gray-800 px-3 py-2 rounded-full font-semibold transition whitespace-nowrap">编程技术博客</a>
+      <a href="#" rel="noopener noreferrer"
+        id="diaryBtn"
+        class="border border-white hover:bg-white hover:text-gray-800 px-3 py-2 rounded-full font-semibold transition whitespace-nowrap">心灵日记</a>
     </div>
+
 
     <!-- 社交图标 -->
     <div class="flex justify-center space-x-6 text-2xl text-white/80">
@@ -73,7 +77,8 @@
         greeting: "你好，我是",
         subtext: "欢迎来到我的主页",
         about: "关于我",
-        blog: "我的博客",
+        blog: "编程技术博客",
+        diary: "心灵日记",
         copiedWeChat: "已复制微信号！",
         copiedPhone: "已复制手机号！"
       },
@@ -81,7 +86,8 @@
         greeting: "Hello, I'm",
         subtext: "Welcome to my personal homepage",
         about: "About Me",
-        blog: "My Blog",
+        blog: "Coding Blog",
+        diary: "Mind Diary",
         copiedWeChat: "WeChat ID copied!",
         copiedPhone: "Phone number copied!"
       },
@@ -89,12 +95,12 @@
         greeting: "안녕하세요, 저는",
         subtext: "제 개인 홈페이지에 오신 것을 환영합니다",
         about: "소개",
-        blog: "블로그",
+        blog: "코딩 블로그",
+        diary: "마음 일기",
         copiedWeChat: "위챗 아이디가 복사되었습니다!",
         copiedPhone: "전화번호가 복사되었습니다!"
       }
     };
-
 
     let currentLang = 'zh';
 
@@ -105,8 +111,8 @@
       document.getElementById("subtext").textContent = t.subtext;
       document.getElementById("aboutBtn").textContent = t.about;
       document.getElementById("blogBtn").textContent = t.blog;
+      document.getElementById("diaryBtn").textContent = t.diary;
     }
-
 
     function copyToClipboard(elementId, type) {
       const text = document.getElementById(elementId).textContent;
@@ -127,7 +133,6 @@
         alert('复制失败，请手动复制');
       });
     }
-
   </script>
 
 </body>
